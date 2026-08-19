@@ -1,0 +1,40 @@
+# Creates the Kubernetes Deployment used to run the application
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+
+spec:
+  # Uses a fixed replica count when HPA is disabled
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+
+          # Pulls the application image from the configured ECR repository
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+
+          # Defines CPU and memory requests and limits used by Kubernetes scheduling and HPA
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

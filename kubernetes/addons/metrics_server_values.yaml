@@ -1,0 +1,5 @@
+# Configures Metrics Server to collect CPU and memory usage from Kubernetes nodes and pods
+
+args:
+  # Prefers internal node addresses when collecting kubelet metrics
+  - --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP

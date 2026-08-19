@@ -1,0 +1,20 @@
+# Configures the Kubernetes Cluster Autoscaler for the EKS cluster
+
+autoDiscovery:
+  clusterName: eks-project-Development-eks
+
+awsRegion: us-east-1
+
+rbac:
+  serviceAccount:
+    create: true
+    name: cluster-autoscaler
+
+    # Associates the Kubernetes service account with the Terraform-created IAM role
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::236898858566:role/eks-project-Development-cluster-autoscaler-role"
+
+# Defines additional Cluster Autoscaler behavior
+extraArgs:
+  balance-similar-node-groups: true
+  skip-nodes-with-system-pods: false

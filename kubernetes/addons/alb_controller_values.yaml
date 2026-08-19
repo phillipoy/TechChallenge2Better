@@ -1,0 +1,16 @@
+# Configures the AWS Load Balancer Controller for the EKS cluster
+
+clusterName: eks-project-Development-eks
+
+region: us-east-1
+
+# Defines the VPC managed by the AWS Load Balancer Controller
+vpcId: "vpc-055e7aeda779e0c84"
+
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+
+  # Associates the Kubernetes service account with the Terraform-created IAM role
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::236898858566:role/eks-project-Development-alb-controller-role"

@@ -1,0 +1,1 @@
+# No IAM resources are required for the VPC module

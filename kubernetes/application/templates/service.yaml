@@ -1,0 +1,21 @@
+# Creates the Kubernetes Service used to expose the application internally
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+
+spec:
+  # Uses a ClusterIP service because external traffic will be handled by the ALB
+  type: {{ .Values.service.type }}
+
+  selector:
+    app: {{ .Release.Name }}
+
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP

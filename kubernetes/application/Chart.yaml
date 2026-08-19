@@ -1,0 +1,17 @@
+# Defines metadata for the application Helm chart
+apiVersion: v2
+
+# Defines the name of the Helm chart
+name: application
+
+# Describes the purpose of the Helm chart
+description: Helm chart for deploying the application to Amazon EKS
+
+# Defines this chart as an application chart
+type: application
+
+# Defines the version of the Helm chart
+version: 0.1.0
+
+# Defines the version of the application being deployed
+appVersion: "1.0.0"
