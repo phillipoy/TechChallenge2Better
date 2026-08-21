@@ -40,7 +40,7 @@ output "ecr_repository_url" {
   value       = module.ecr.repository_url
 }
 
-## Exposes the public IP address of the Jenkins EC2 instance
+# Exposes the public IP address of the Jenkins EC2 instance
 output "jenkins_public_ip" {
   description = "Public IP address of the Jenkins EC2 instance"
   value       = module.ec2.jenkins_public_ip

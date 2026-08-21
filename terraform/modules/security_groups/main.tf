@@ -21,16 +21,16 @@ resource "aws_vpc_security_group_ingress_rule" "jenkins_ssh" {
   description = "Allows SSH access from the trusted administrator network"
 }
 
-# Allows access to the Jenkins web interface
+# Allows external webhook traffic to reach the Jenkins web interface
 resource "aws_vpc_security_group_ingress_rule" "jenkins_web" {
   security_group_id = aws_security_group.jenkins.id
 
-  cidr_ipv4   = var.jenkins_admin_cidr
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 8080
   to_port     = 8080
   ip_protocol = "tcp"
 
-  description = "Allows access to the Jenkins web interface"
+  description = "Allows webhook traffic to reach Jenkins"
 }
 
 # Allows Jenkins to reach AWS APIs, package repositories, and external services
