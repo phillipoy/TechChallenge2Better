@@ -1,4 +1,27 @@
+# Python
 venv/
 __pycache__/
+*.pyc
+
+# Git
 .git/
+.gitignore
+
+# macOS
 .DS_Store
+
+# Terraform
+terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Kubernetes / Helm
+kubernetes/
+
+# Jenkins
+Jenkinsfile
+
+# IDE
+.vscode/
+.idea/

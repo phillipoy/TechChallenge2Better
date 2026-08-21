@@ -17,3 +17,15 @@ variable "private_subnet_ids" {
   description = "IDs of the private subnets used by the EKS cluster"
   type        = list(string)
 }
+
+# Defines the Jenkins IAM role granted deployment access to the EKS cluster
+variable "jenkins_role_arn" {
+  description = "ARN of the Jenkins IAM role requiring access to the EKS cluster"
+  type        = string
+}
+
+# Defines the Jenkins security group allowed to access the EKS API server
+variable "jenkins_security_group_id" {
+  description = "ID of the security group used by the Jenkins EC2 instance"
+  type        = string
+}

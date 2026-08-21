@@ -38,3 +38,9 @@ variable "private_subnet_cidrs" {
   description = "CIDR blocks for private subnets"
   type        = list(string)
 }
+
+# Defines the trusted CIDR block allowed to access the Jenkins server
+variable "jenkins_admin_cidr" {
+  description = "CIDR block allowed to access Jenkins over SSH and port 8080"
+  type        = string
+}

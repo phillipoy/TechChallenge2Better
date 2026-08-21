@@ -248,3 +248,30 @@ resource "aws_iam_role_policy_attachment" "cluster_autoscaler" {
   role       = aws_iam_role.cluster_autoscaler.name
   policy_arn = aws_iam_policy.cluster_autoscaler.arn
 }
+
+# Grants the Jenkins IAM role authentication access to the EKS cluster
+resource "aws_eks_access_entry" "jenkins" {
+  cluster_name  = aws_eks_cluster.main.name
+  principal_arn = var.jenkins_role_arn
+  type          = "STANDARD"
+
+  tags = {
+    Name = "${var.project_name}-${var.environment}-jenkins-eks-access"
+  }
+}
+
+# Grants Jenkins cluster-level Kubernetes permissions required for CI/CD deployments
+resource "aws_eks_access_policy_association" "jenkins" {
+  cluster_name  = aws_eks_cluster.main.name
+  principal_arn = var.jenkins_role_arn
+
+  policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
+
+  depends_on = [
+    aws_eks_access_entry.jenkins
+  ]
+}
