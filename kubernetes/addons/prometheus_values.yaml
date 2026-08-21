@@ -1,0 +1,11 @@
+grafana:
+  enabled: true
+
+prometheus:
+  enabled: true
+
+alertmanager:
+  enabled: true
+
+prometheusOperator:
+  enabled: true
